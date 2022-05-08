@@ -14,9 +14,29 @@ mongo = PyMongo(app)
 db = mongo.db.users
 
 
-@app.route('/')
-def hello_world():
-    return '<h1>Hello World!</h1>'
+@app.route('/users', methods=['GET'])
+def getUsers():
+    return 'getUsers'
+
+
+@app.route('/users', methods=['POST'])
+def createUser():
+    return 'createUser'
+
+
+@app.route('/user/<id>', methods=['GET'])
+def getUser(id):
+    return 'getUser'
+
+
+@app.route('/user/<id>', methods=['PUT'])
+def updateUser(id):
+    return 'updateUser'
+
+
+@app.route('/user/<id>', methods=['DELETE'])
+def deleteUser(id):
+    return 'deleteUser'
 
 
 if __name__ == "__main__":
