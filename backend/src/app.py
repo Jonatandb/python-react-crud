@@ -11,6 +11,8 @@ app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
 
 mongo = PyMongo(app)
 
+CORS(app)
+
 db = mongo.db.users
 
 
