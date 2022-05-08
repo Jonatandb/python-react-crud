@@ -5,7 +5,7 @@ GET {{API_URL}}/users
 
 
 ### GET USER BY ID:
-GET {{API_URL}}/user/62780de3e7fcca8b3a5d1cce
+GET {{API_URL}}/users/62780de3e7fcca8b3a5d1cce
 
 
 ### CREATE USER:
@@ -13,3 +13,7 @@ POST {{API_URL}}/users
 content-type:  application/json
 
 { "name": "Jonatan db", "email": "jonatan_db@gmail.com", "password": "asd123" }
+
+
+### DELETE USER BY ID:
+DELETE {{API_URL}}/users/627804d370ef3f6b60c6a884
