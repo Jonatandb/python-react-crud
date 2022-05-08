@@ -13,7 +13,7 @@
 
     python /src/app.py
 
-    Visit http://localhost:5000/
+    Visit http://localhost:5000/users to see the users list.
 
 ---
 
