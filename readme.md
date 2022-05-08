@@ -6,7 +6,7 @@
 
 ### Backend
 
-    Create .env file inside src folder and fill it with the following variables:
+    Create .env file inside backend/src folder and fill it with the following variables:
       MONGO_URI = "mongodb://..."
 
     source backend/venv/Scripts/activate
@@ -16,6 +16,9 @@
     Visit http://localhost:5000/users to see the users list.
 
 ### Frontend (in a new terminal)
+
+    Create .env file inside frontend/src folder and fill it with the following variables:
+      REACT_APP_API_URL = "http://localhost..."
 
     cd frontend
 
