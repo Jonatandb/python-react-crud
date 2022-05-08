@@ -4,16 +4,22 @@
 
 ## Running the project
 
+### Backend
+
     Create .env file inside src folder and fill it with the following variables:
       MONGO_URI = "mongodb://..."
 
-    cd backend
+    source backend/venv/Scripts/activate
 
-    source venv/Scripts/activate
-
-    python /src/app.py
+    python backend/src/app.py
 
     Visit http://localhost:5000/users to see the users list.
+
+### Frontend (in a new terminal)
+
+    cd frontend
+
+    npm start
 
 ---
 
