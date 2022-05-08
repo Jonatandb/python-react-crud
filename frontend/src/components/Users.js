@@ -28,6 +28,9 @@ const Users = () => {
       },
       body: JSON.stringify({ name, email, password }),
     })
+    setName('')
+    setEmail('')
+    setPassword('')
     getUsers()
   }
 
