@@ -1,4 +1,12 @@
-POST http://localhost:5000/users
+@API_URL = http://localhost:5000
+
+###
+
+GET {{API_URL}}/users
+
+###
+
+POST {{API_URL}}/users
 content-type:  application/json
 
 { "name": "Jonatan db", "email": "jonatan_db@gmail.com", "password": "asd123" }

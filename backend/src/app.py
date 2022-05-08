@@ -16,7 +16,15 @@ db = mongo.db.users
 
 @app.route('/users', methods=['GET'])
 def getUsers():
-    return 'getUsers'
+    users = []
+    for user in db.find():
+        users.append({
+            '_id': str(user['_id']),
+            'name': user['name'],
+            'email': user['email'],
+            'password': user['password'],
+        })
+    return jsonify(users)
 
 
 @app.route('/users', methods=['POST'])
