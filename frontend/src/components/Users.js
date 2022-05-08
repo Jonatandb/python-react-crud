@@ -21,21 +21,31 @@ const Users = () => {
 
   const handleSumbit = async e => {
     e.preventDefault()
-    const res = await fetch(`${API_URL}/users`, {
+    await fetch(`${API_URL}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ name, email, password }),
     })
-    const data = await res.json()
-    console.log(data)
+    getUsers()
   }
 
   const getUsers = async () => {
     const res = await fetch(`${API_URL}/users`)
     const data = await res.json()
     setUsers(data)
+  }
+
+  const deleteUser = async id => {
+    // eslint-disable-next-line no-restricted-globals
+    const res = confirm('Are you sure you want to delete this user?')
+    if (res) {
+      await fetch(`${API_URL}/users/${id}`, {
+        method: 'DELETE',
+      })
+      getUsers()
+    }
   }
 
   return (
@@ -51,6 +61,7 @@ const Users = () => {
               placeholder='Enter name'
               value={name}
               onChange={e => setName(e.target.value)}
+              autoFocus
             />
           </div>
           <div className='form-group'>
@@ -97,7 +108,10 @@ const Users = () => {
                   <button className='btn btn-secondary btn-sm btn-block'>
                     Edit
                   </button>
-                  <button className='btn btn-danger btn-sm btn-block'>
+                  <button
+                    className='btn btn-danger btn-sm btn-block'
+                    onClick={() => deleteUser(user._id)}
+                  >
                     Delete
                   </button>
                 </td>
