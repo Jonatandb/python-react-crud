@@ -17,3 +17,10 @@ content-type:  application/json
 
 ### DELETE USER BY ID:
 DELETE {{API_URL}}/users/627804d370ef3f6b60c6a884
+
+
+### UPDATE USER BY ID:
+PUT {{API_URL}}/users/62780c6bc1e3dd96d05bd027
+content-type:  application/json
+
+{ "name": "Jonatan PUT", "email": "jonatan_put@gmail.com", "password": "as123d112323" }
