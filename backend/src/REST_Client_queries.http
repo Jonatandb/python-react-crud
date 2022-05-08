@@ -1,11 +1,14 @@
 @API_URL = http://localhost:5000
 
-###
-
+### GET USERS:
 GET {{API_URL}}/users
 
-###
 
+### GET USER BY ID:
+GET {{API_URL}}/user/62780de3e7fcca8b3a5d1cce
+
+
+### CREATE USER:
 POST {{API_URL}}/users
 content-type:  application/json
 

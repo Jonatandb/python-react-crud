@@ -39,7 +39,13 @@ def createUser():
 
 @app.route('/user/<id>', methods=['GET'])
 def getUser(id):
-    return 'getUser'
+    user = db.find_one({'_id': ObjectId(id)})
+    return jsonify({
+        '_id': str(user['_id']),
+        'name': user['name'],
+        'email': user['email'],
+        'password': user['password'],
+    })
 
 
 @app.route('/user/<id>', methods=['PUT'])
