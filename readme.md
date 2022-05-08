@@ -1,5 +1,13 @@
 # Python Crud (Flask - React)
 
+https://www.youtube.com/watch?v=D1W8H4Rkb9A
+
+---
+
+<p style="text-align:center;">
+    <img src="./Screenshot.gif" alt="Python Crud (Flasl - React)" >
+</p>
+
 ---
 
 ## Running the project
