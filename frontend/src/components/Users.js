@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -6,6 +6,18 @@ const Users = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [users, setUsers] = useState([])
+  const componentIsMounted = useRef(true)
+
+  useEffect(() => {
+    if (componentIsMounted.current) {
+      getUsers()
+    }
+
+    return () => {
+      componentIsMounted.current = false
+    }
+  }, [])
 
   const handleSumbit = async e => {
     e.preventDefault()
@@ -18,6 +30,12 @@ const Users = () => {
     })
     const data = await res.json()
     console.log(data)
+  }
+
+  const getUsers = async () => {
+    const res = await fetch(`${API_URL}/users`)
+    const data = await res.json()
+    setUsers(data)
   }
 
   return (
@@ -58,6 +76,35 @@ const Users = () => {
           </div>
           <button className='btn btn-primary btn-block'>Create</button>
         </form>
+      </div>
+      <div className='col-md-8'>
+        <table className='table table-striped'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <tr key={user._id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.password}</td>
+                <td>
+                  <button className='btn btn-secondary btn-sm btn-block'>
+                    Edit
+                  </button>
+                  <button className='btn btn-danger btn-sm btn-block'>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   )
