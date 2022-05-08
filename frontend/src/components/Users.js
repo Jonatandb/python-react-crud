@@ -6,6 +6,8 @@ const Users = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isEditMode, setIsEditMode] = useState(false)
+  const [currentUserId, setCurrentUserId] = useState(null)
   const [users, setUsers] = useState([])
   const componentIsMounted = useRef(true)
 
@@ -21,16 +23,17 @@ const Users = () => {
 
   const handleSumbit = async e => {
     e.preventDefault()
-    await fetch(`${API_URL}/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, email, password }),
-    })
+    if (isEditMode) {
+      await updateUser(currentUserId)
+    } else {
+      await createUser(currentUserId)
+    }
+
     setName('')
     setEmail('')
     setPassword('')
+    setIsEditMode(false)
+    setCurrentUserId(null)
     getUsers()
   }
 
@@ -51,6 +54,36 @@ const Users = () => {
     }
   }
 
+  const createUser = async id => {
+    await fetch(`${API_URL}/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
+    })
+  }
+
+  const updateUser = async id => {
+    await fetch(`${API_URL}/users/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }),
+    })
+  }
+
+  const editUser = async id => {
+    const res = await fetch(`${API_URL}/users/${id}`)
+    const data = await res.json()
+    setName(data.name)
+    setEmail(data.email)
+    setPassword(data.password)
+    setIsEditMode(true)
+    setCurrentUserId(id)
+  }
+
   return (
     <div className='row'>
       <div className='col-md-4'>
@@ -58,6 +91,7 @@ const Users = () => {
           <div className='form-group'>
             <label htmlFor='name'>Name</label>
             <input
+              required
               type='text'
               name='name'
               className='form-control mb-2'
@@ -70,6 +104,7 @@ const Users = () => {
           <div className='form-group'>
             <label htmlFor='email'>Email</label>
             <input
+              required
               type='email'
               name='email'
               className='form-control mb-2'
@@ -81,6 +116,7 @@ const Users = () => {
           <div className='form-group'>
             <label htmlFor='password'>Password</label>
             <input
+              required
               type='password'
               className='form-control mb-2'
               placeholder='Enter password'
@@ -88,7 +124,9 @@ const Users = () => {
               onChange={e => setPassword(e.target.value)}
             />
           </div>
-          <button className='btn btn-primary btn-block'>Create</button>
+          <button className='btn btn-primary btn-block'>
+            {isEditMode ? 'Edit' : 'Create'}
+          </button>
         </form>
       </div>
       <div className='col-md-8'>
@@ -108,7 +146,10 @@ const Users = () => {
                 <td>{user.email}</td>
                 <td>{user.password}</td>
                 <td>
-                  <button className='btn btn-secondary btn-sm btn-block'>
+                  <button
+                    className='btn btn-secondary btn-sm btn-block'
+                    onClick={() => editUser(user._id)}
+                  >
                     Edit
                   </button>
                   <button
