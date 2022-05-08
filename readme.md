@@ -25,6 +25,11 @@
 
 ### Researched sites:
 
+- https://bootswatch.com/
+- https://magic.reactjs.net/htmltojsx.htm
+- https://getbootstrap.com/docs/4.0/components/navbar/
+- https://github.com/topics/react-router-dom?l=javascript&o=desc&s=updated
+- https://stackoverflow.com/questions/63124161/attempted-import-error-switch-is-not-exported-from-react-router-dom
 - https://pypi.org/project/python-dotenv/
 - https://stackoverflow.com/questions/739993/how-do-i-get-a-list-of-locally-installed-python-modules
 - https://flask.palletsprojects.com/en/2.0.x/cli/
