@@ -1,5 +1,5 @@
-from flask import Flask
-from flask_pymongo import PyMongo
+from flask import Flask, request, jsonify
+from flask_pymongo import PyMongo, ObjectId
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -21,7 +21,12 @@ def getUsers():
 
 @app.route('/users', methods=['POST'])
 def createUser():
-    return 'createUser'
+    id = db.insert_one({
+        "name": request.json["name"],
+        "email": request.json["email"],
+        "password": request.json["password"]
+    })
+    return jsonify(str(ObjectId(id.inserted_id)))
 
 
 @app.route('/user/<id>', methods=['GET'])
