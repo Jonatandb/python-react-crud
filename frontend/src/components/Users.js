@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Spinner } from './Spinner/Spinner'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -6,6 +7,7 @@ const Users = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
   const [isEditMode, setIsEditMode] = useState(false)
   const [currentUserId, setCurrentUserId] = useState(null)
   const [users, setUsers] = useState([])
@@ -41,12 +43,14 @@ const Users = () => {
     const res = await fetch(`${API_URL}/users`)
     const data = await res.json()
     setUsers(data)
+    setIsLoading(false)
   }
 
   const deleteUser = async id => {
     // eslint-disable-next-line no-restricted-globals
     const res = confirm('Are you sure you want to delete this user?')
     if (res) {
+      setIsLoading(true)
       await fetch(`${API_URL}/users/${id}`, {
         method: 'DELETE',
       })
@@ -55,6 +59,7 @@ const Users = () => {
   }
 
   const createUser = async id => {
+    setIsLoading(true)
     await fetch(`${API_URL}/users`, {
       method: 'POST',
       headers: {
@@ -62,9 +67,11 @@ const Users = () => {
       },
       body: JSON.stringify({ name, email, password }),
     })
+    setIsLoading(false)
   }
 
   const updateUser = async id => {
+    setIsLoading(true)
     await fetch(`${API_URL}/users/${id}`, {
       method: 'PUT',
       headers: {
@@ -72,11 +79,14 @@ const Users = () => {
       },
       body: JSON.stringify({ name, email, password }),
     })
+    setIsLoading(false)
   }
 
   const editUser = async id => {
+    setIsLoading(true)
     const res = await fetch(`${API_URL}/users/${id}`)
     const data = await res.json()
+    setIsLoading(false)
     setName(data.name)
     setEmail(data.email)
     setPassword(data.password)
@@ -128,7 +138,9 @@ const Users = () => {
             {isEditMode ? 'Edit' : 'Create'}
           </button>
         </form>
+        {isLoading && <Spinner />}
       </div>
+
       <div className='col-md-8'>
         <table className='table table-striped'>
           <thead>

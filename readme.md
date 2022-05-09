@@ -36,6 +36,9 @@ https://www.youtube.com/watch?v=D1W8H4Rkb9A
 
 ### Researched sites:
 
+- https://getbootstrap.com/docs/5.1/utilities/position/#center-elements
+- https://stackoverflow.com/questions/42388989/bootstrap-center-vertical-and-horizontal-alignment
+- https://www.youtube.com/watch?v=8nm9WPptL0c CREA un SPINNER Loader 🌀 en CSS #shorts
 - https://bootswatch.com/
 - https://magic.reactjs.net/htmltojsx.htm
 - https://getbootstrap.com/docs/4.0/components/navbar/
